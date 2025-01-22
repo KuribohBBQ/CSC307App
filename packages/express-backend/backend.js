@@ -124,7 +124,7 @@ app.get("users/:id/both", (req, res) => {
   const name = req.query.name;
   const job = req.query.job;
   if (name != undefined && job != undefined){
-    let result = findUsersByNameAndJob(name, job);
+    let result = findUserNameJob(name, job);
     result = { users_list: result };
     res.send(result);
   }
