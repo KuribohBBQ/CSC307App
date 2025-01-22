@@ -120,7 +120,7 @@ const findUserNameJob = (name, job) => {
 //const to get 
 //app to get users and job
 
-app.get("users/:id/both", (req, res) => {
+app.get("users/job", (req, res) => {
   const name = req.query.name;
   const job = req.query.job;
   if (name != undefined && job != undefined){
