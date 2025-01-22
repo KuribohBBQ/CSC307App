@@ -100,10 +100,39 @@ app.delete("users/:id", (req, res) => {
   else 
   {
     const loc = users.users_list.findIndex(user => user.id == id);
-    users.users_list.splice(location, 1);
+    users.users_list.splice(loc, 1);
   }
 }) 
+//const to find user by job
+const findUserJob = (job) => {
+  return users["users_list"].filter(
+    (user) => user["job"] === job
+  );
+};
 
+//const to find user by name and job
+const findUserNameJob = (name, job) => {
+  return users["users_list"].filter(
+    (user) => user["name"] === name && user["job"] === job
+  );
+};
+
+//const to get 
+//app to get users and job
+
+app.get("users/:id/both", (req, res) => {
+  const name = req.query.name;
+  const job = req.query.job;
+  if (name != undefined && job != undefined){
+    let result = findUsersByNameAndJob(name, job);
+    result = { users_list: result };
+    res.send(result);
+  }
+  else {
+    res.send(users);
+  }
+
+})
 
 
 
