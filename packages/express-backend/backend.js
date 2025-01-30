@@ -1,5 +1,6 @@
 // backend.js
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
@@ -32,6 +33,12 @@ const users = {
     }
   ]
 };
+// Math.random()
+//genetate id on server
+const generateID = () => {
+  return Math.random().toString();
+}
+
 const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
@@ -42,10 +49,15 @@ const findUserByName = (name) => {
 };
 
 const addUser = (user) => {
-  users["users_list"].push(user);
+  const id = generateID();
+  const UserwithID = {id, ... user}
+  users["users_list"].push(UserwithID);
   return user;
 };
 
+
+//cors app
+app.use(cors());
 
 app.use(express.json());
 
@@ -117,7 +129,6 @@ const findUserNameJob = (name, job) => {
   );
 };
 
-//const to get 
 //app to get users and job
 
 app.get("users/job", (req, res) => {
@@ -134,7 +145,48 @@ app.get("users/job", (req, res) => {
 
 })
 
+//Use 201 Content Created
+app.post("/users/add", (req, res) => {
+  const userToAdd = req.body;
+  const user = addUser(userToAdd);
+  res.status(201).send(user);
+})
 
 
 
 
+// app.get("users/job", (req, res) => {
+//   const name = req.query.name;
+//   const job = req.query.job;
+//   if (name != undefined && job != undefined){
+//     let result = findUserNameJob(name, job);
+//     result = { users_list: result };
+//     res.send(result);
+//   }
+//   else {
+//     res.send(users);
+//   }
+
+// })
+
+
+
+// app.post("/users", (req, res) => {
+//   const userToAdd = req.body;
+//   addUser(userToAdd);
+//   res.send();
+// });
+
+// //app for delete
+// app.delete("users/:id", (req, res) => {
+//   const id = req.params["id"]; //or req.params.id
+//   let result = findUserById(id);
+//   if (result == undefined){
+//     res.status(404).send("Resource not found")
+//   }
+//   else 
+//   {
+//     const loc = users.users_list.findIndex(user => user.id == id);
+//     users.users_list.splice(loc, 1);
+//   }
+// }) 
