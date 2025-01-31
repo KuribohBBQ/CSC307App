@@ -71,21 +71,21 @@ import React, { useState, useEffect } from "react";
       })
     }
     //Delete on backend
-    function deleteUser(ID) {
-      const promise = fetch(
-        `http://localhost:/users/${ID}`, 
-        {
-          method: "DELETE"
-        })
-        .then((res) => {
-          if (res.status == 204)
-            return promise;
+    // function deleteUser(ID) {
+    //   const promise = fetch(
+    //     `http://localhost:/users/${ID}`, 
+    //     {
+    //       method: "DELETE"
+    //     })
+    //     .then((res) => {
+    //       if (res.status == 204)
+    //         return promise;
 
-          else if (res.status = 404)
-            console.log("Error 404 Not Found")
-        })
+    //       else if (res.status = 404)
+    //         console.log("Error 404 Not Found")
+    //     })
 
-    }
+    // }
   
     function updateList(person) {
       postUser(person)
