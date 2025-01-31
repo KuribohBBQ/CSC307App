@@ -48,6 +48,7 @@ const findUserByName = (name) => {
   );
 };
 
+//edited add user to push id
 const addUser = (user) => {
   const id = generateID();
   const UserwithID = {id, ... user}
@@ -103,7 +104,7 @@ app.post("/users", (req, res) => {
 });
 
 //app for delete
-app.delete("users/:id", (req, res) => {
+app.delete("/users/:id", (req, res) => {
   const id = req.params["id"]; //or req.params.id
   let result = findUserById(id);
   if (result == undefined){
@@ -131,7 +132,7 @@ const findUserNameJob = (name, job) => {
 
 //app to get users and job
 
-app.get("users/job", (req, res) => {
+app.get("/users/job", (req, res) => {
   const name = req.query.name;
   const job = req.query.job;
   if (name != undefined && job != undefined){
@@ -146,7 +147,7 @@ app.get("users/job", (req, res) => {
 })
 
 //Use 201 Content Created
-app.post("/users/add", (req, res) => {
+app.post("/users", (req, res) => {
   const userToAdd = req.body;
   const user = addUser(userToAdd);
   res.status(201).send(user);
