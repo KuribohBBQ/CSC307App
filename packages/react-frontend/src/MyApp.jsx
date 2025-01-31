@@ -55,7 +55,9 @@ import React, { useState, useEffect } from "react";
         `http://localhost:/users/${ID}`, 
         {
           method: "DELETE"
-        }).then((res) => {
+        });
+        promise
+        .then((res) => {
           if (res.status == 204){
           const updatedCharacters = characters.filter((character) => character.id !== id);
           setCharacters(updatedCharacters);
