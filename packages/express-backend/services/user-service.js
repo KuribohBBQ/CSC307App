@@ -39,6 +39,16 @@ function findUserByName(name) {
 function findUserByJob(job) {
   return userModel.find({ job: job });
 }
+//find user by name and job
+function findUserbByNameAndJob(name, job)
+{
+    return userModel.find({ name: name, job: job });
+    
+}
+function deleteByID(id)
+{
+    return userModel.findByIdAndDelete(id);
+}
 
 export default {
   addUser,
@@ -46,4 +56,6 @@ export default {
   findUserById,
   findUserByName,
   findUserByJob,
+  findUserbByNameAndJob,
+  deleteByID
 };
